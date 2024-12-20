@@ -1,7 +1,7 @@
 import React from "react";
 import "./css/Home.css";
 import Image  from "./istockphoto-1403182301-612x612.jpg";
-import { NavbarExp,Footer,BloodGroupCount } from "./Componets/Componets"; 
+import {NavbarExp,Footer,BloodGroupCount,DoctorsTeam } from "./Componets/Componets"; 
 import { useEffect,useState } from "react";
 import { db } from "./Firebase";
 import { getDocs,collection,getDoc,addDoc,doc } from "firebase/firestore";
@@ -9,48 +9,16 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import  Image2  from "./img2.jpg";
 import { auth } from "./Firebase";
 import Accordion from 'react-bootstrap/Accordion';
+import Swal from "sweetalert2";
+
 
 const styles = {
   textContainer: {
     flex: 1,
-    marginRight: "20px",
+    marginRight: "10px",
   },
-  // title: {
-  //   fontSize: "2.5rem",
-  //   fontWeight: "bold",
-  //   color: "#d9534f",
-  //   marginBottom: "20px",
-  // },
-  // description: {
-  //   fontSize: "1.2rem",
-  //   color: "#555",
-  //   lineHeight: "1.6",
-  //   marginBottom: "20px",
-  // },
-  // button: {
-  //   padding: "10px 20px",
-  //   fontSize: "1rem",
-  //   color: "#fff",
-  //   backgroundColor: "#d9534f",
-  //   border: "none",
-  //   borderRadius: "5px",
-  //   cursor: "pointer",
-  //   transition: "background-color 0.3s",
-  // },
-  // imageContainer: {
-  //   flex: 1,
-  //   textAlign: "center",
-  // },
-  // image: {
-  //   maxWidth: "100%",
-  //   borderRadius: "10px",
-  // },
-
-
-
 //  ______________________
 container: {
-    padding: "50px 20px",
     backgroundColor: "#fff",
     textAlign: "center",
     borderRadius: "10px",
@@ -81,7 +49,7 @@ container: {
     gap: "15px",
   },
   input: {
-    width: "80%",
+    width: "90%",
     padding: "10px",
     border: "1px solid #ccc",
     borderRadius: "5px",
@@ -165,7 +133,12 @@ function Home() {
     
     e.preventDefault();
     if(DonorEmails === emails){
-       alert("Already")
+       Swal.fire({
+        title: "Already Registered",
+        text: "You are already listed as a donor.",
+        icon: "warning",
+        confirmButtonColor: "#d9534f",
+      });
     }
      else{
       const docRef = await addDoc(collection(db, "Dolore"), {
@@ -175,7 +148,13 @@ function Home() {
         UserCity: cities,
         UserBloodGroup:blood,
         URL:URL
-      });      
+      });
+      Swal.fire({
+        title: "Success",
+        text: "Thank you for registering as a donor!",
+        icon: "success",
+        confirmButtonColor: "#5cb85c",
+      });     
   }     
     }
       
@@ -184,7 +163,8 @@ function Home() {
   return (
     <>
       <NavbarExp/>
-      <div className="heroContainer">
+
+      <div className="heroContainer heroContainer1Sec">
         <div style={styles.textContainer} className="textContainer_heroes"> 
           <br />
           <h1 style={styles.title} className="heroTitle">Wellcome To Blood Bank, 
@@ -218,9 +198,8 @@ function Home() {
             className="heroImage"
           />
         </div>
-
     <div style={styles.imageContainer} className="imageContainer_Heroes">
-        <div style={styles.container}>
+        <div style={styles.container} className="BloodDonor_Con">
       <h2 style={styles.title2}>Become a Blood Donor</h2>
       <p style={styles.description}>
         Make a life-saving impact by joining our community of blood donors.
@@ -248,10 +227,10 @@ function Home() {
       </div>
     </div>
 
-
+    
     <section className="QuAboutSect" style={{width:"95%" 
      ,justifyContent:"center",margin:"auto", 
-        padding:"50px 10px", borderRadius:"10px"}}>
+        padding:"20px 10px", borderRadius:"10px"}}>
     <Accordion defaultActiveKey="0" flush style= 
      {{width:"98%",justifyContent:"center",margin:"auto",}}>
       <Accordion.Item eventKey="0" style={{ borderRadius:"5px", 
@@ -279,7 +258,12 @@ function Home() {
       </Accordion.Item>
     </Accordion>
 
+
     </section>
+
+    <br />
+    <DoctorsTeam/>
+
     <br /> <br />
     <section> <br />
       <div className="allDonors">

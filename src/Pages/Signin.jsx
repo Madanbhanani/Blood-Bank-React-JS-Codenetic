@@ -5,6 +5,7 @@ import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { section } from "motion/react-client";
 
 
 function Signin() {
@@ -30,7 +31,9 @@ function Signin() {
   };
 
   return (
-    <div style={styles.container} className="FormContainer">
+    
+   <section style={{margin:"10px"}}>
+     <div style={styles.container} >
       <h1 style={{ color: "brown", textAlign:"left" }}>Login</h1>
       <br />
       <form onSubmit={handleSubmit} style={styles.form}>
@@ -67,6 +70,7 @@ function Signin() {
         <br />
       </form>
     </div>
+   </section>
   );
 }
 
@@ -74,6 +78,7 @@ const styles = {
   container: {
     maxWidth: "400px",
     margin: "50px auto",
+    marginTop:"100px",
     padding: "20px",
     border: "1px solid #ccc",
     borderRadius: "10px",

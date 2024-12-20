@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   getAuth,
   onAuthStateChanged,
@@ -12,6 +13,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { NavbarExp,Footer } from "./Componets/Componets";
+import { Navigate } from "react-router-dom";
 
 function CurrentUserProfile() {
   const [user, setUser] = useState(null);
@@ -21,7 +23,9 @@ function CurrentUserProfile() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
-
+ 
+   const Navigate =useNavigate();
+   
   const auth = getAuth();
   const db = getFirestore();
 
@@ -56,6 +60,7 @@ function CurrentUserProfile() {
     try {
       await signOut(auth);
       alert("Signed out successfully.");
+      Navigate('/')
     } catch (error) {
       console.error("Sign out error:", error.message);
     }

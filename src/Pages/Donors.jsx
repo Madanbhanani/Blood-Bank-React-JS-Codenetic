@@ -10,6 +10,7 @@ function AllDonors() {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(true);
 
+
   const fetchDonors = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "Dolore"));
@@ -90,6 +91,8 @@ function AllDonors() {
           <ul className="donor-list">
             {filteredDonors.map((donor) => (
               <li key={donor.id} className="donor-card">
+                <img src={donor.URL} alt="" srcset="" style= 
+                 {{ maxWidth:"150px"}}/>
                 <p>
                   <strong>Name:</strong> {donor.UserName || "N/A"}
                 </p>

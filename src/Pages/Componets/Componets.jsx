@@ -13,6 +13,11 @@ import { db } from '../Firebase';
 import { auth } from '../Firebase';
 import { onSnapshot,collection } from 'firebase/firestore';
 
+import doctor1  from '../docotor 1.jpg';
+import doctor2  from '../doctor2.png';
+import doctor3  from '../image2.jpg';
+
+
 function NavbarExp(props) {
   const [user, setUser] = useState(null);
   const [FullName, setFullName] = useState(null);
@@ -54,12 +59,13 @@ function NavbarExp(props) {
                 aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                 placement="end"
               >
-                <Offcanvas.Header closeButton>
+                <Offcanvas.Header closeButton style={{textAlign:"center",     
+                   backgroundColor:"brown",color:"white"}}>
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                    Offcanvas
+                    BLOOD BANK
                   </Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
+                </Offcanvas.Header >
+                <Offcanvas.Body style={{ textAlign:"center"}}>
                   <Nav className="justify-content-end flex-grow-1 pe-3">
                     <Nav.Link to="/Home">
                       <Link to="/Home" style= 
@@ -85,7 +91,7 @@ function NavbarExp(props) {
                   <Form className="d-flex">
                   <Button variant="outline-success"
                   title={FullName +" is Working"} style= 
-                   {{borderRadius:"50%"}}>
+                   {{borderRadius:"50%", margin:"auto"}}>
                     <Link to="/Profile" style= 
                       {{color:"black",fontWeight:"bold",textDecoration:"none"}} 
                        >{user} 
@@ -293,7 +299,7 @@ function BloodGroupCount() {
                 borderRadius: "10px",
                 boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
                 textAlign: "center",
-                width: "120px",
+                width: "130px",
                 fontSize: "18px",
               }}
             >
@@ -306,5 +312,52 @@ function BloodGroupCount() {
     </section>
   );
 }
+
+
+
+const DoctorsTeam = () => {
+  const doctors = [
+    {
+      name: "Dr. Sarah Johnson",
+      specialty: "Hematologist",
+      image: doctor1,
+      socialLinks: ["logo-facebook", "logo-twitter", "logo-instagram"],
+    },
+    {
+      name: "Dr. David Lee",
+      specialty: "Oncologist",
+      image: doctor2,
+      socialLinks: ["logo-linkedin", "logo-facebook", "logo-twitter"],
+    },
+    {
+      name: "Dr. Emily Carter",
+      specialty: "General Practitioner",
+      image: doctor3,
+      socialLinks: ["logo-instagram", "logo-facebook", "logo-twitter"],
+    },
+  ];
+
+  return (
+    <div className="doctors-team">
+      <h1>Meet Our Doctors</h1>
+      <div className="team-container">
+        {doctors.map((doctor, index) => (
+          <div className="doctor-card" key={index}>
+            <img src={doctor.image} alt={doctor.name} className="doctor-image" />
+            <h3>{doctor.name}</h3>
+            <h4>{doctor.specialty}</h4>
+            <div className="social-icons">
+              {doctor.socialLinks.map((icon, idx) => (
+                <ion-icon key={idx} name={icon}></ion-icon>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+
   
-  export  {NavbarExp,Footer,BloodGroupCount};
+  export  {DoctorsTeam,NavbarExp,Footer,BloodGroupCount};
